@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>
+      <p style="color: Black">Ingredients</p>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="padding_helper col col-33" color="white">
+    <img class="full-image" src="{{item.itemImage}}">
+    <div class="card-description">{{item.itemName}}</div>
+    <div class="card-description">{{item.itemDescription}}</div>
+    <ion-item>
+        <ion-label fixed>Qty</ion-label>
+        <button clear item-right (click)="increment(qty)"><ion-icon name="ios-arrow-dropup-circle"></ion-icon></button>
+        <ion-input type="number" [(ngModel)]="qty" name="qty"></ion-input>
+        <button clear item-right (click)="decrement(qty)"><ion-icon name="ios-arrow-dropdown-circle"></ion-icon></button>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Calories</ion-label>
+      <ion-label fixed>{{item.itemCalories}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Price</ion-label>
+      <ion-label fixed>{{item.itemPrice}}</ion-label>
+    </ion-item>
+
+  </div>
+  <button ion-button block color="dark" icon="cart" (click)="addToCart($event, item)">Add to Cart</button>
+  <button ion-button block color="dark" icon="edit" (click)="modifyItem($event, item)">Modify</button>
+
+  <div [hidden]="toggleShowHide">
+    <ion-list>
+      <ion-item *ngFor="let ing of item.ingredients">
+        <ion-label>{{ing.ingredientName}}</ion-label>
+        <ion-checkbox color="dark" checked="false"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-label stacked>Comments</ion-label>
+      <ion-textarea rows="6" name="comment" placeholder="Any additional comments..." [(ngModel)]="notes">
+      </ion-textarea>
+    </ion-item>
+  </div>
+</ion-content>

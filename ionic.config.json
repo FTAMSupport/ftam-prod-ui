@@ -1,0 +1,8 @@
+{
+  "name": "Blue Label - yeyos-1",
+  "app_id": "d18aae7e",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

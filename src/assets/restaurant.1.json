@@ -1,0 +1,61 @@
+[
+  {
+      "_id": "5a04c79525706a84f03ab9f5",
+      "updatedAt": "2017-11-09T21:24:37.475Z",
+      "createdAt": "2017-11-09T21:24:37.475Z",
+      "disabled": false,
+      "openDate": "10/09/2017",
+      "intersection": "SW A Street & Central avenue.",
+      "owner": "Rafael",
+      "phone": "479-123-4567",
+      "description": "Yeyos Mexican Grill (Truck) on the Square",
+      "name": "Yeyos Truck",
+      "restaurantId": 1,
+      "entityId": 1,
+      "__v": 0,
+      "sImage1" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+      "sImage2" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+      "sImage3" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+      "coordinates": {
+          "latitude": 36.3724351,
+          "longitude": -94.2448077
+      },
+      "address": [
+          {
+              "address1": "122 W Central Ave",
+              "address2": "Truck",
+              "city": "Bentonville",
+              "state": "Arkansas or AR",
+              "zip": "72712",
+              "_id": "5a04c79525706a84f03ab9f6"
+          }
+      ],
+      "specialHours": [
+          {
+              "date": "11/24/2017",
+              "description": "Thanksgiving",
+              "notificationBegin": "2017-10-03T04:54:37.755Z",
+              "notificationEnd": "2017-10-03T04:54:37.755Z",
+              "openTime": "06:00",
+              "closeTime": "22:00",
+              "isClosed": false,
+              "_id": "5a04c79525706a84f03ab9f8"
+          }
+      ],
+      "dailyHours": [
+          {
+              "dayOfWeek": 0,
+              "dayName": "Sunday",
+              "openTime": "06:00",
+              "closeTime": "10:00",
+              "_id": "5a04c79525706a84f03ab9f7"
+          }
+      ],
+      "onlineOrdering": {
+          "enabled": true,
+          "canPickup": true,
+          "canPayOnline": true,
+          "posSystem": true
+      }
+  }
+]

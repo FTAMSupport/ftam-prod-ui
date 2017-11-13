@@ -1,0 +1,381 @@
+[
+  {
+  "_id" : "54e6794d62fdbd0612cbd5a1",
+  "id" : "yeyosMenu01",
+  "category" : [
+    {
+      "name" : "Breakfast",
+      "description" : "Breakfast Items",
+      "item" : [
+        {
+          "id" : "B01",
+          "name" : "Egg & Chorizo Burrito",
+          "description" : "Pan fried Egg & Chorizo Burrito served with lime sauce.",
+          "image" : "http://www.goodfoodchannel.org/wp-content/uploads/2016/01/super-sonic-breakfast-burrito.jpg",
+          "price" : "5.95",
+          "calories" : "250",
+          "ingredients" : [
+            {
+              "name" : "lettuce",
+              "description" : "fresh salad lettuce",
+              "customize" : "false"
+            },
+            {
+              "name" : "jalapeneos",
+              "description" : "spicy handpicked",
+              "customize" : "ture"
+            }
+          ]
+        },
+        {
+          "id" : "B02",
+          "name" : "Egg & Cheese Burrito",
+          "description" : "5 pcs. marinated chicken on skewers. Served with peanut sauce and cucumber salad.",
+          "image" : "http://kabobs.com/content/img/product/338-1.jpg",
+          "price" : "7.95",
+          "ingredients" : [
+            {
+              "name" : "lettuce",
+              "description" : "fresh salad lettuce",
+              "customize" : "false"
+            },
+            {
+              "name" : "jalapeneos",
+              "description" : "spicy handpicked",
+              "customize" : "ture"
+            }
+          ]
+        },
+        {
+          "id" : "B03",
+          "name" : "Egg & Sausage Burrito",
+          "description" : "6 pcs. deep-fried wontons served with cream cheese and crab meat. Served with plum sauce.",
+          "image" : "http://www.organizeyourselfskinny.com/wp-content/uploads/2011/10/DSC01526.jpg",
+          "price" : "6.95",
+          "calories" : "350",
+          "ingredients" : [
+            {
+              "name" : "lettuce",
+              "description" : "fresh salad lettuce",
+              "customize" : "false"
+            },
+            {
+              "name" : "jalapeneos",
+              "description" : "spicy handpicked",
+              "customize" : "ture"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "Lunch & Dinner",
+      "description" : "Served with your choice of Meat.",
+      "item" : [
+        {
+          "id" : "L01",
+          "name" : "Burrito Bowl - 1",
+          "description" : "One 32' domed bowl with Mexican rice &beans topped with your choice of meat or veggies, lettuce, pico, guacamole, sour cream, home made tortilla chips and roasted tomatillo salsa verde",
+          "image" : "http://www.organizeyourselfskinny.com/wp-content/uploads/2011/10/DSC01526.jpg",
+          "price" : "10.00",
+          "calories" : "450",
+          "multi": true,
+          "multiStep": 5,
+          "ingredients" : [
+            {
+              "name" : "lettuce",
+              "description" : "fresh salad lettuce",
+              "customize" : "false"
+            },
+            {
+              "name" : "jalapeneos",
+              "description" : "spicy handpicked",
+              "customize" : "ture"
+            }
+          ],
+          "step" : [
+            {
+              "text" : "Your Choice of Meat",
+              "required" : "true",
+              "maxOptions" : "1",
+              "option" : [
+                {
+                  "text" : "Carne Asada",
+                  "priceModifier" : "0",
+                  "additionalPrice" : 0.00
+                },
+                {
+                  "text" : "Al Pastor Citrus",
+                  "priceModifier" : "0",
+                  "additionalPrice" : 0.00
+                },
+                {
+                  "text" : "Bob's Campechano",
+                  "priceModifier" : "0",
+                  "additionalPrice" : 0.00
+                },
+                {
+                  "text" : "Barbacoa",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                },
+                {
+                  "text" : "Mexican Chorizo",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.00
+                },
+                {
+                  "text" : "Grilled Chicken",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 1.50
+                },
+                {
+                  "text" : "Veggie Chipotle",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 1.00
+                },
+                {
+                  "text" : "Lengua",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                },
+                {
+                  "text" : "Cochinita Pibil",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 3.00
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id" : "L02",
+          "name" : "Burrito Bowl - 2",
+          "description" : "One 32' domed bowl with Mexican rice &beans topped with your choice of meat or veggies, lettuce, pico, guacamole, sour cream, home made tortilla chips and roasted tomatillo salsa verde",
+          "image" : "http://www.organizeyourselfskinny.com/wp-content/uploads/2011/10/DSC01526.jpg",
+          "price" : "5.00",
+          "calories" : "225",
+          "ingredients" : [
+            {
+              "name" : "lettuce",
+              "description" : "fresh salad lettuce",
+              "customize" : "false"
+            },
+            {
+              "name" : "jalapeneos",
+              "description" : "spicy handpicked",
+              "customize" : "ture"
+            }
+          ],
+          "step" : [
+            {
+              "text" : "Your choice of meat?",
+              "required" : "true",
+              "maxOptions" : "1",
+              "option" : [
+                {
+                  "text" : "Carne Asada",
+                  "priceModifier" : "0",
+                  "additionalPrice" : 0.00
+                },
+                {
+                  "text" : "Al Pastor Citrus",
+                  "priceModifier" : "0",
+                  "additionalPrice" : 0.00
+                },
+                {
+                  "text" : "Bob's Campechano",
+                  "priceModifier" : "0",
+                  "additionalPrice" : 0.00
+                },
+                {
+                  "text" : "Barbacoa",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                },
+                {
+                  "text" : "Mexican Chorizo",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                },
+                {
+                  "text" : "Grilled Chicken",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                },
+                {
+                  "text" : "Veggie Chipotle",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                },
+                {
+                  "text" : "Lengua",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                },
+                {
+                  "text" : "Cochinita Pibil",
+                  "priceModifier" : "1",
+                  "additionalPrice" : 2.50
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+  {
+    "_id" : "5972794b734d1d6202a8ab1d",
+    "id" : "yeyosMenu02",
+    "category" : [
+      {
+        "id" : "B01",
+        "name" : "breakfast",
+        "description" : "Breakfast Items",
+        "item" : [
+          {
+            "name" : "Egg & Chorizo Burrito",
+            "description" : "Pan fried Egg & Chorizo Burrito served with lime sauce.",
+            "image" : "http://www.goodfoodchannel.org/wp-content/uploads/2016/01/super-sonic-breakfast-burrito.jpg",
+            "price" : "5.95",
+            "calories" : "250",
+            "ingredients" : [
+              {
+                "name" : "lettuce",
+                "description" : "fresh salad lettuce",
+                "customize" : "false"
+              },
+              {
+                "name" : "jalapeneos",
+                "description" : "spicy handpicked",
+                "customize" : "ture"
+              }
+            ]
+          },
+          {
+            "id" : "B02",
+            "name" : "Egg & Cheese Burrito",
+            "description" : "5 pcs. marinated chicken on skewers. Served with peanut sauce and cucumber salad.",
+            "image" : "http://kabobs.com/content/img/product/338-1.jpg",
+            "price" : "7.95",
+            "calories" : "250",
+            "ingredients" : [
+              {
+                "name" : "lettuce",
+                "description" : "fresh salad lettuce",
+                "customize" : "false"
+              },
+              {
+                "name" : "jalapeneos",
+                "description" : "spicy handpicked",
+                "customize" : "ture"
+              }
+            ]
+          },
+          {
+            "id" : "B03",
+            "name" : "Egg & Sausage Burrito",
+            "description" : "6 pcs. deep-fried wontons served with cream cheese and crab meat. Served with plum sauce.",
+            "image" : "http://www.organizeyourselfskinny.com/wp-content/uploads/2011/10/DSC01526.jpg",
+            "price" : "6.95",
+            "calories" : "250",
+            "ingredients" : [
+              {
+                "name" : "lettuce",
+                "description" : "fresh salad lettuce",
+                "customize" : "false"
+              },
+              {
+                "name" : "jalapeneos",
+                "description" : "spicy handpicked",
+                "customize" : "ture"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id" : "L01",
+        "name" : "Lunch & Dinner",
+        "description" : "Served with your choice of Meat.",
+        "item" : [
+          {
+            "name" : "Burrito Bowl",
+            "description" : "One 32' domed bowl with Mexican rice &beans topped with your choice of meat or veggies, lettuce, pico, guacamole, sour cream, home made tortilla chips and roasted tomatillo salsa verde",
+            "image" : "http://www.organizeyourselfskinny.com/wp-content/uploads/2011/10/DSC01526.jpg",
+            "price" : "10.00",
+            "calories" : "250",
+            "ingredients" : [
+              {
+                "name" : "lettuce",
+                "description" : "fresh salad lettuce",
+                "customize" : "false"
+              },
+              {
+                "name" : "jalapeneos",
+                "description" : "spicy handpicked",
+                "customize" : "ture"
+              }
+            ],
+            "step" : [
+              {
+                "text" : "Your choice of meat?",
+                "required" : "true",
+                "maxOptions" : "1",
+                "option" : [
+                  {
+                    "text" : "Carne Asada",
+                    "priceModifier" : "0",
+                    "additionalPrice" : 0.00
+                  },
+                  {
+                    "text" : "Al Pastor Citrus",
+                    "priceModifier" : "0",
+                    "additionalPrice" : 0.00
+                  },
+                  {
+                    "text" : "Bob's Campechano",
+                    "priceModifier" : "0",
+                    "additionalPrice" : 0.00
+                  },
+                  {
+                    "text" : "Barbacoa",
+                    "priceModifier" : "1",
+                    "additionalPrice" : 2.50
+                  },
+                  {
+                    "text" : "Mexican Chorizo",
+                    "priceModifier" : "1",
+                    "additionalPrice" : 2.50
+                  },
+                  {
+                    "text" : "Grilled Chicken",
+                    "priceModifier" : "1",
+                    "additionalPrice" : 2.50
+                  },
+                  {
+                    "text" : "Veggie Chipotle",
+                    "priceModifier" : "1",
+                    "additionalPrice" : 2.50
+                  },
+                  {
+                    "text" : "Lengua",
+                    "priceModifier" : "1",
+                    "additionalPrice" : 2.50
+                  },
+                  {
+                    "text" : "Cochinita Pibil",
+                    "priceModifier" : "1",
+                    "additionalPrice" : 2.50
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

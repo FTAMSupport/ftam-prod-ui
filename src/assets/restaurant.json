@@ -1,0 +1,79 @@
+[
+  {
+    "_id" : "54f640de93a9a0e46ad794b7",
+    "entityId" : "01",
+    "id" : "01",
+    "name" : "Yeyos Mexican Grill - 1",
+    "owner" : "rafael@yeyos.com",
+    "sImage1" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sImage2" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sImage3" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sText1" : "Splash page text1",
+    "sText2" : "Splash page text2",
+    "sText3" : "Splash page text3",
+    "notesLimit" : "90 char",
+    "guestName" : "Amigo",
+    "maxOrders" : 10,
+    "description" : "Best Mexican food in the Square!",
+    "menu" : "54e6794d62fdbd0612cbd5a1",
+    "address" : {
+      "addressLine1" : "122 W Central Ave",
+      "addressLine2" : "",
+      "city" : "Bentonville",
+      "state" : "AR",
+      "zip" : 72712,
+      "phone" : "4793811726"
+    }
+    
+  },
+  {
+    "_id" : "5972791f734d1d6202a8ab0e",
+    "entityId" : "01",
+    "id" : "02",
+    "name" : "Yeyos Mexican Grill - 2",
+    "owner" : "rafael@yeyos.com",
+    "sImage1" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sImage2" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sImage3" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sText1" : "Splash page text1",
+    "sText2" : "Splash page text2",
+    "sText3" : "Splash page text3",
+    "notesLimit" : "90 char",
+    "guestName" : "Guest",
+    "description" : "Best Mexican food in the 8th market!",
+    "menu" : "5972794b734d1d6202a8ab1d",
+    "address" : {
+      "addressLine1" : "8th street market",
+      "addressLine2" : "",
+      "city" : "Bentonville",
+      "state" : "AR",
+      "zip" : 72712,
+      "phone" : 4793811726
+    }
+  },
+  {
+    "_id" : "5972791f734d1d6202a8ab0e",
+    "entityId" : "01",
+    "id" : "03",
+    "name" : "Yeyos Mexican Grill - 3",
+    "owner" : "rafael@yeyos.com",
+    "sImage1" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sImage2" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sImage3" : "https://s3-media2.fl.yelpcdn.com/bphoto/KdhcLmuJY3S3l9GelTAmLw/ls.jpg",
+    "sText1" : "Splash page text1",
+    "sText2" : "Splash page text2",
+    "sText3" : "Splash page text3",
+    "notesLimit" : "90 char",
+    "guestName" : "Amigo",
+    "description" : "Best Mexican food in the 8th market!",
+    "menu" : "5972794b734d1d6202a8ab1d",
+    "address" : {
+      "addressLine1" : "8th street market",
+      "addressLine2" : "",
+      "city" : "Bentonville",
+      "state" : "AR",
+      "zip" : 72712,
+      "phone" : 4793811726
+    }
+  }
+]
