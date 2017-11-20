@@ -5,12 +5,12 @@ import { Http } from '@angular/http';
 
 // Import pages to allow links to the page
 import { LocationPage } from "../../pages/location/location";
+import { CartPage } from '../../pages/cart/cart';
 import { IngredientsPage } from '../../pages/ingredients/ingredients';
 //import { CartPage } from "../../pages/cart/cart";
 
 // Service import for items
-import { MenuApi } from '../../services/menu-api.service';
-import { GlobalVarApi } from '../../services/global-vars-api.service';
+import { MenuApi, ItemApi, CartApi, GlobalVarApi } from '../../services/service';
 
 // The component imports the specific parts from the html and scss file.
 // The Http provider is included to make the API call to the service.
@@ -26,16 +26,21 @@ export class MenuPage {
   location: any;
   menu: any;
   passedCategory: any;
+  cartCount: any;
+
   constructor(
     public navCtrl: NavController,
     private alertCtrl: AlertController,
     private navParams: NavParams,
     private menuApi: MenuApi,
+    private cartApi: CartApi,
     private globalvarApi: GlobalVarApi,
     public loadingController: LoadingController
   ) {
     // Get location info from global-var
     this.location = this.globalvarApi.getLocation();
+    // Cart Count
+    this.cartCount = this.globalvarApi.getCount();
   }
 
   // ------------------------------------------------------------------------------------------
@@ -55,7 +60,9 @@ export class MenuPage {
     loader.present();
 
     // Get the JSON data from our locationApi
-    this.menuApi.getMenu().then(data => {
+    let restaurantID = this.location.restaurantId;
+    console.log(restaurantID);
+    this.menuApi.getMenu(restaurantID).then(data => {
       loader.dismiss();
       this.menu = data[0].category;
       // this.menu = this.menu.filter(item => item.category == this.passedCategory);
@@ -69,14 +76,33 @@ export class MenuPage {
     console.log("item tapped");
     this.navCtrl.push(IngredientsPage, item);
   }
-  
+
+  navigate($event, name) {
+    switch (name) {
+      case 'menu':
+        console.log("Cart TAPPED");
+        //this.navCtrl.push(MenuPage);
+        break;
+      case 'cart':
+        console.log("Cart TAPPED");
+        break;
+      case 'grabby':
+        console.log("Grabby TAPPED");
+        break;
+      case 'profile':
+        console.log("Profile TAPPED");
+        break;
+      default:
+    }
+  }
+
   // Present this pop-up only when applicable
   presentPopup($event, item) {
     if (item.step != undefined && item.step[0] != undefined) {
       let alert = this.alertCtrl.create();
       alert.setTitle(item.step[0].stepText);
       for (let option of item.step[0].options) {
-        if (option.additionalPrice !== 0.00) {
+        if (option.optionAdditionalPrice !== 0.00) {
           let text = option.optionText + "(+ $" + option.optionAdditionalPrice + ")";
           alert.addInput({
             type: 'radio',
@@ -100,7 +126,9 @@ export class MenuPage {
         handler: selected => {
           let array = selected.split(',')
           item.stepSelected = array[1];
-          item.extraPrice = array[0];
+          item.extraPrice = parseInt(array[0]);
+          //item.itemPrice = parseInt(item.itemPrice, 10) + parseInt(item.extraPrice, 10);
+          item.itemPrice = item.itemPrice + item.extraPrice;
           this.itemTapped($event, item)
         }
       });

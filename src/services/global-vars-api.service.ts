@@ -25,5 +25,14 @@ export class GlobalVarApi {
   getCartItems() {
     return this.cartItems;
   }
+  getCount(){
+    return this.cartItems.length;
+  }
+
+  //-- reset
+  reset(){
+     this.location = [];
+     this.cartItems = [];
+  }
 
 }

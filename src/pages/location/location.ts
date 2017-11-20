@@ -52,6 +52,7 @@ export class LocationPage {
     this.locationApi.getLocation().then(data => {
       loader.dismiss();
       this.locations = data;
+      this.locations = this.locations.filter(item => item.disabled == false);
       this.locations = this.locations.filter(item => item.category == this.passedCategory);
     });
 

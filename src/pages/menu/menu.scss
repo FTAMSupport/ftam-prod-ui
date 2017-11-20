@@ -1,5 +1,8 @@
 page-menu {
-
+  .button-md-primary {
+    color: #222;
+    background-color: #fff;
+  }
     .toolbar-background-md {
     border-color: #b2b2b2;
     background: #E46909;
@@ -8,18 +11,35 @@ page-menu {
     border-bottom: none
   }
   .col-33 {
+    width: 100%;
+    height: 100%;
+    float:left;
+  }
+  .col-133 {
     width: 140%;
     height: 70%;
     float:left;
   }
   
-  .full-image {
+  .full-image1 {
     width: 80%;
     height: 80%;
   }
+
+.full-image {
+    position: relative;
+    //float: left;
+    width:  100px;
+    height: 100px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
   
   .card-description {
     text-align: center;
+    white-space: pre-wrap;
+    font-size: medium;
   }
 
   .category-description {
@@ -75,4 +95,18 @@ page-menu {
     line-height: 1.1;
     margin: 5px;
   }
+  #notification-button {            
+    position: relative;
+    //width: 42px;
+    //top:1px;
+    //right: 1px;
+    overflow: visible!important;
+}
+#notifications-badge {
+    background-color: rgb(255, 166, 0);
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    border-radius: 100%;
+}
 }

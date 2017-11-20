@@ -7,7 +7,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
   <ion-item>
     <h4>{{location.config.guestName}}</h4>
     <h4>Pick Up Location</h4>
@@ -18,7 +17,6 @@
     <p>{{ location.address[0].address1}}</p>
     <p>{{ location.address[0].city}},{{ location.address[0].state}} {{ location.address[0].zip}}</p>
   </ion-item>
-</ion-card>
   <ion-item>
     <div class="row header">
       <thead>
@@ -33,61 +31,63 @@
       </thead>
     </div>
 
-    <ion-list>
-      <ion-item *ngFor="let item of cart">
-        <td style="width:70%">
-          <h2>{{item.itemName}}</h2>
-        </td>
-        <td style="width:5%">
-          <button clear item-right (click)="quantityPlus(item)">
-            <ion-icon name="ios-arrow-dropup-circle"></ion-icon>
-          </button>
-        </td>
-        <td style="width:10%">
-          <h4>{{item.qty}}</h4>
-        </td>
-        <td style="width:5%">
-          <button clear item-right (click)="quantityMinus(item)">
-            <ion-icon name="ios-arrow-dropdown-circle"></ion-icon>
-          </button>
-        </td>
-        <td style="width:10%">
-          <h4> ${{item.itemPrice * item.qty}}</h4>
-          <h4> ${{item.tax}}</h4>
-        </td>
-        <td style="width:5%">
-          <button clear item-right (click)="removeItemFromCart(item)">
-            <ion-icon name="ios-remove-circle"></ion-icon>
-          </button>
-        </td>
+
+    <div class="row" *ngFor="let item of cart">
+      <tbody>
+        <tr>
+          <td style="width:70%">
+            <h2>{{item.itemName}}</h2>
+          </td>
+          <td style="width:5%">
+            <button clear item-right (click)="quantityPlus(item)">
+              <ion-icon name="ios-arrow-dropup-circle"></ion-icon>
+            </button>
+          </td>
+          <td style="width:10%">
+            <h4>{{item.qty}}</h4>
+          </td>
+          <td style="width:5%">
+            <button clear item-right (click)="quantityMinus(item)">
+              <ion-icon name="ios-arrow-dropdown-circle"></ion-icon>
+            </button>
+          </td>
+          <td style="width:10%">
+            <h4> ${{item.itemPrice * item.qty}}</h4>
+            <h4> ${{item.tax}}</h4>
+          </td>
+          <td style="width:5%">
+            <button clear item-right (click)="removeItemFromCart(item)">
+              <ion-icon name="ios-remove-circle"></ion-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </div>
+    <ion-list *ngIf="cart.length">
+      <ion-item>
+        <h2>SUBTOTAL</h2>
+        <h2 item-right>${{getSubTotal()}}</h2>
+      </ion-item>
+      <ion-item>
+        <h2>TAXES</h2>
+        <h2 item-right>${{getTaxTotal()}}</h2>
+      </ion-item>
+      <ion-item>
+        <h2>Total Due</h2>
+        <h2 item-right>${{getGrandTotal()}}</h2>
       </ion-item>
     </ion-list>
-  </ion-item>
-  
-  <ion-item *ngIf="!cart.length">
+
+    <ion-item *ngIf="!cart.length">
       <h2 class="center">Cart is empty</h2>
     </ion-item>
+  </ion-item>
+
 
 </ion-content>
 
 <ion-footer>
 
-    <ion-card>
-        <ion-list *ngIf="cart.length">
-          <ion-item>
-            <h2>SUBTOTAL</h2>
-            <h2 item-right>${{getSubTotal()}}</h2>
-          </ion-item>
-          <ion-item>
-            <h2>TAXES</h2>
-            <h2 item-right>${{getTaxTotal()}}</h2>
-          </ion-item>
-          <ion-item>
-            <h2>Total Due</h2>
-            <h2 item-right>${{getGrandTotal()}}</h2>
-          </ion-item>
-        </ion-list>
-      </ion-card>
   <button ion-button block color="primary" icon="cart" (click)="addMore($event, item)">
     <ion-icon name="ios-add"></ion-icon>Add more items</button>
   <button ion-button block color="dark" icon="cart" (click)="checkOut($event, item)">

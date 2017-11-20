@@ -25,6 +25,7 @@ export class CartPage {
   item = [];
   cart = [];
   location: any;
+  cartCount: any;
 
   constructor(
     public navCtrl: NavController,
@@ -42,8 +43,12 @@ export class CartPage {
     this.cart = this.globalvarApi.getCartItems();
     // Append new items to existing cart
     this.cart.push(this.item);
+    // calculate taxes for cart items
+    this.cartApi.taxLookUp(this.cart);
     // Set cartItem details in global-var
     this.globalvarApi.setCartItems(this.cart);
+    // Cart Count
+    this.cartCount = this.globalvarApi.getCount();
 
     console.log(this.item);
   }
@@ -60,8 +65,7 @@ export class CartPage {
     this.navCtrl.push(CheckoutPage, item);
   }
 
-  deleteCart()
-  {
+  deleteCart() {
     //this.cartService.removeItemById(item.id);
     let self = this;
     let alert = this.alertCtrl.create({
@@ -80,13 +84,14 @@ export class CartPage {
           handler: () => {
             console.log('Buy clicked');
             self.cartApi.emptyCart();
+            this.cartCount = this.cartApi.getCount();
           }
         }
       ]
     });
     alert.present();
   }
-  removeItemFromCart(item){
+  removeItemFromCart(item) {
     //this.cartService.removeItemById(item.id);
     let self = this;
     let alert = this.alertCtrl.create({
@@ -105,6 +110,7 @@ export class CartPage {
           handler: () => {
             console.log('Buy clicked');
             self.cartApi.removeItemById(item.id);
+            this.cartCount = this.cartApi.getCount();
           }
         }
       ]
@@ -112,12 +118,21 @@ export class CartPage {
     alert.present();
   }
 
-  quantityPlus(item){
-    this.cartApi.quantityPlus(item);
+  quantityPlus(item) {
+    if (item.qty < this.location.config.maxOrders) {
+      this.cartApi.quantityPlus(item);
+    } else {
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: 'This is considered a bulk order! Please contact restaurant for better service.',
+        buttons: ['Ok']
+      });
+      alert.present();
+    }
   }
 
-  quantityMinus(item){
-    if(item.qty > 1){
+  quantityMinus(item) {
+    if (item.qty > 1) {
       this.cartApi.quantityMinus(item);
     } else {
       let alert = this.alertCtrl.create({
@@ -129,13 +144,39 @@ export class CartPage {
     }
   }
 
-getTotal(){
-  return this.cartApi.getGrandTotal();
-}
+  getGrandTotal(type) {
+    return this.cartApi.getGrandTotal();
+  }
 
-    // This function is an event to listen to clicks on elements.
-    changeLocation($event) {
-      this.navCtrl.push(LocationPage, location);
+  getSubTotal(type) {
+    return this.cartApi.getSubTotal();
+  }
+
+  getTaxTotal(type) {
+    return this.cartApi.getTaxTotal();
+  }
+
+  // This function is an event to listen to clicks on elements.
+  changeLocation($event) {
+    this.navCtrl.push(LocationPage, location);
+  }
+
+  navigate($event, name) {
+    switch (name) {
+      case 'menu':
+        this.navCtrl.push(MenuPage);
+        break;
+      case 'cart':
+        console.log("Cart TAPPED");
+        break;
+      case 'grabby':
+        console.log("Grabby TAPPED");
+        break;
+      case 'profile':
+        console.log("Profile TAPPED");
+        break;
+      default:
     }
+  }
 
 }

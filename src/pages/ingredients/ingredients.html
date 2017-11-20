@@ -25,16 +25,13 @@
       <ion-label fixed>Price</ion-label>
       <ion-label fixed>{{item.itemPrice}}</ion-label>
     </ion-item>
-
   </div>
-  <button ion-button block color="dark" icon="cart" (click)="addToCart($event, item)">Add to Cart</button>
-  <button ion-button block color="dark" icon="edit" (click)="modifyItem($event, item)">Modify</button>
-
   <div [hidden]="toggleShowHide">
+      <ion-label stacked>Extras</ion-label>
     <ion-list>
       <ion-item *ngFor="let ing of item.ingredients">
-        <ion-label>{{ing.ingredientName}}</ion-label>
-        <ion-checkbox color="dark" checked="false"></ion-checkbox>
+        <ion-label>{{ing.ingredientName}} {{ing.ingredientAdditionalPrice}}</ion-label>
+        <ion-checkbox color="dark" checked="false" (ionChange)="selectIng($event, ing)"></ion-checkbox>
       </ion-item>
     </ion-list>
     <ion-item>
@@ -44,3 +41,28 @@
     </ion-item>
   </div>
 </ion-content>
+
+<ion-footer>
+    <button ion-button block color="dark" icon="cart" (click)="addToCart($event, item)">Add to Cart</button>
+    <button ion-button block color="dark" icon="edit" (click)="modifyItem($event, item)">Modify</button>
+    <ion-row>
+        <ion-col no-padding>
+            <button  id="notification-button" no-margin ion-button full  color="primary" (click)="navigate($event, 'menu')">
+                <ion-icon name="ios-menu"></ion-icon>Menu</button> 
+        </ion-col>
+        <ion-col no-padding>
+            <button no-margin ion-button full color="primary" (click)="navigate($event, 'cart')">
+                <ion-icon name="ios-cart">
+                    <ion-badge id="notifications-badge" color="danger">{{cartCount}}</ion-badge>
+                  </ion-icon>Cart</button>
+        </ion-col>
+        <ion-col no-padding>
+            <button no-margin ion-button full color="primary" (click)="navigate($event, 'grabby')">
+                <ion-icon name="logo-android"></ion-icon>Grabby</button>
+        </ion-col>
+        <ion-col no-padding>
+            <button no-margin ion-button full color="primary" (click)="navigate($event, 'profile')">
+                <ion-icon name="ios-person"></ion-icon>Profile</button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

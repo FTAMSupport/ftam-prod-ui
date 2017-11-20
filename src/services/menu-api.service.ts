@@ -4,13 +4,14 @@ import { Http } from '@angular/http';
 @Injectable()
 export class MenuApi {
   constructor(private http: Http) {}
-  getMenu(){
-    const url = 'http://grabbyapi-dev.azurewebsites.net/api/menu/getByRestaurantId/' + 1;
+  getMenu(restaurantID){
+console.log(restaurantID);
+    const url = 'http://grabbyapi.azurewebsites.net/api/menu/getByRestaurantId/' + restaurantID;
     return new Promise(resolve => {
       //this.http.get('assets/menu.json')
       this.http.get(url)
         .subscribe(res => resolve(res.json()));
     });
   }
-} 
+}
 
