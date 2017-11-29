@@ -2,22 +2,18 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { CardModule } from 'ngx-card/ngx-card';
 
 // Http import
 import { HttpModule } from '@angular/http';
 
 // Page imports
-import { CategoryPage } from '../pages/category/category';
-import { ListPage } from '../pages/list/list';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-import { SingleItem } from '../pages/single-item/single-item';
 import { CartPage } from '../pages/cart/cart';
 import { MenuPage } from '../pages/menu/menu';
 import { LocationPage } from '../pages/location/location';
 import { IngredientsPage } from '../pages/ingredients/ingredients';
 import { CheckoutPage } from '../pages/checkout/checkout';
-import { UserprofilePage } from '../pages/userprofile/userprofile';
+import { ConfirmationPage } from '../pages/confirmation/confirmation';
 
 // Service imports
 import { ItemApi } from '../services/item-api.service';
@@ -33,37 +29,28 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    CategoryPage,
-    ListPage,
-    HomePage,
-    SingleItem,
-    TabsPage,
-    CartPage,
-    MenuPage,
     LocationPage,
+    MenuPage,
     IngredientsPage,
-    CheckoutPage,
-    UserprofilePage
+    CartPage,
+    CheckoutPage, 
+    ConfirmationPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    CardModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    CategoryPage,
-    ListPage,
-    HomePage,
-    SingleItem,
-    TabsPage,
     CartPage,
     MenuPage,
     LocationPage,
     IngredientsPage,
     CheckoutPage,
-    UserprofilePage
+    ConfirmationPage
   ],
   providers: [
     StatusBar,
@@ -74,6 +61,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CartApi,
     GlobalVarApi,
     HttpModule,
+    CardModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

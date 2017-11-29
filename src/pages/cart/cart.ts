@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';;
 import { Http } from '@angular/http';
 
-// Import pages to allow links to the page
-import { MenuPage } from '../menu/menu';
-import { CheckoutPage } from '../checkout/checkout';
+
 // Import pages to allow links to the page
 import { LocationPage } from "../location/location";
+import { MenuPage } from '../menu/menu';
+import { CheckoutPage } from '../checkout/checkout';
+import { ConfirmationPage } from '../confirmation/confirmation';
 
 // Service import for items
 import { ItemApi, CartApi, GlobalVarApi } from '../../services/service';
@@ -26,6 +27,9 @@ export class CartPage {
   cart = [];
   location: any;
   cartCount: any;
+  cartHeader: string = 'Confirm Order';
+  flagPay: boolean = true;
+  flagCheckout: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -37,20 +41,24 @@ export class CartPage {
   ) {
     // Get location details from global-var
     this.location = this.globalvarApi.getLocation();
-    // Get item info from previous page
-    this.item = this.navParams.data;
     // Get cartItem details from global-var
     this.cart = this.globalvarApi.getCartItems();
-    // Append new items to existing cart
-    this.cart.push(this.item);
-    // calculate taxes for cart items
-    this.cartApi.taxLookUp(this.cart);
+    // Get item info from previous page
+    if (this.navParams.get('itemId')) {
+      this.item = this.navParams.data;
+      // Append new items to existing cart
+      this.cart.push(this.item);
+      // calculate taxes for cart items
+      this.cartApi.taxLookUp(this.cart);
+      this.cartHeader = 'My Cart';
+      this.flagPay = false;
+      this.flagCheckout = true;
+      console.log(this.item);
+    }
     // Set cartItem details in global-var
     this.globalvarApi.setCartItems(this.cart);
     // Cart Count
     this.cartCount = this.globalvarApi.getCount();
-
-    console.log(this.item);
   }
   // This function is an event to listen to clicks on elements.
   // The Menu Page has been included to be passed in this function.
@@ -59,10 +67,11 @@ export class CartPage {
     item.trigger = "CartPage";
     this.navCtrl.push(MenuPage, item);
   }
-  checkOut($event, item) {
-    console.log("Add More Items tapped");
-    item.trigger = "CartPage";
-    this.navCtrl.push(CheckoutPage, item);
+
+  // Cancel the order items and start over
+  cancel() {
+    console.log("Cancel tapped");
+    this.navCtrl.push(MenuPage);
   }
 
   deleteCart() {
@@ -159,6 +168,41 @@ export class CartPage {
   // This function is an event to listen to clicks on elements.
   changeLocation($event) {
     this.navCtrl.push(LocationPage, location);
+  }
+
+  checkOut1($event, item) {
+    console.log("Add More Items tapped");
+    item.trigger = "CartPage";
+    this.navCtrl.push(CheckoutPage, item);
+  }
+
+  checkOut2(item) {
+    console.log("Add More Items tapped");
+    this.navCtrl.push(CheckoutPage, item);
+  }
+
+  // Present this pop-up only when applicable
+  checkOut($event, item) {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Please provide your Contact Number');
+    alert.addInput({
+      name: 'phone',
+      placeholder: 'your mobile number'
+    });
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        console.log(data.phone);
+        this.checkOut2(item);
+      }
+    });
+    alert.present();
+  }
+
+  confirmPay($event, item) {
+    console.log("Confirm Pay tapped");
+    this.navCtrl.push(ConfirmationPage);
   }
 
   navigate($event, name) {

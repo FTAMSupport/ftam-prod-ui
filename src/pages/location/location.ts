@@ -54,6 +54,9 @@ export class LocationPage {
       this.locations = data;
       this.locations = this.locations.filter(item => item.disabled == false);
       this.locations = this.locations.filter(item => item.category == this.passedCategory);
+      if(this.locations.length === 1){
+        this.locationTapped(this.locations[0]);
+      }
     });
 
   }
@@ -92,7 +95,7 @@ export class LocationPage {
 
   // This function is an event to listen to clicks on elements.
   // The Menu Page has been included to be passed in this function.
-  locationTapped($event, location) {
+  locationTapped(location) {
     // Set location in global-var
     this.globalvarApi.setLocation(location);
     location.trigger = "LocationPage";

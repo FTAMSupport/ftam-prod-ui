@@ -23,7 +23,7 @@
   <!-- List Code -->
   <ion-list>
     <ul *ngIf="locations">
-    <ion-item *ngFor="let location of locations" (click)="locationTapped($event, location)">
+    <ion-item *ngFor="let location of locations" (click)="locationTapped(location)">
       <ion-avatar item-left>
         <img src="{{location.config.sImage1}}">
       </ion-avatar>

@@ -1,24 +1,24 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
     <ion-title text-center>
-      <p style="color: Black">MY CART</p>
+      <p style="color: Black">{{cartHeader}}</p>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
-  <ion-item>
-    <h4>{{location.config.guestName}}</h4>
-    <h4>Pick Up Location</h4>
-    <ion-avatar item-left>
-      <img src="{{location.config.sImage1}}">
-    </ion-avatar>
-    <h2>{{location.name}}</h2>
-    <p>{{ location.address[0].address1}}</p>
-    <p>{{ location.address[0].city}},{{ location.address[0].state}} {{ location.address[0].zip}}</p>
-  </ion-item>
-</ion-card>
+    <ion-item *ngIf="flagPay">
+      <h4>{{location.config.guestName}}</h4>
+      <h4>Pick Up Location</h4>
+      <ion-avatar item-left>
+        <img src="{{location.config.sImage1}}">
+      </ion-avatar>
+      <h2>{{location.name}}</h2>
+      <p>{{ location.address[0].address1}}</p>
+      <p>{{ location.address[0].city}},{{ location.address[0].state}} {{ location.address[0].zip}}</p>
+    </ion-item>
+  </ion-card>
   <ion-item>
     <div class="row header">
       <thead>
@@ -39,7 +39,7 @@
           <h2>{{item.itemName}}</h2>
         </td>
         <td style="width:5%">
-          <button clear item-right (click)="quantityPlus(item)">
+          <button clear item-right (click)="quantityPlus(item)"  *ngIf="flagCheckout">
             <ion-icon name="ios-arrow-dropup-circle"></ion-icon>
           </button>
         </td>
@@ -47,55 +47,60 @@
           <h4>{{item.qty}}</h4>
         </td>
         <td style="width:5%">
-          <button clear item-right (click)="quantityMinus(item)">
+          <button clear item-right (click)="quantityMinus(item)"  *ngIf="flagCheckout">
             <ion-icon name="ios-arrow-dropdown-circle"></ion-icon>
           </button>
         </td>
         <td style="width:10%">
           <h4> ${{item.itemPrice * item.qty}}</h4>
-          <h4> ${{item.tax}}</h4>
+          <h4 *ngIf="flagPay"> ${{item.tax}}</h4>
         </td>
         <td style="width:5%">
-          <button clear item-right (click)="removeItemFromCart(item)">
+          <button clear item-right (click)="removeItemFromCart(item)" *ngIf="flagCheckout">
             <ion-icon name="ios-remove-circle"></ion-icon>
           </button>
         </td>
       </ion-item>
     </ion-list>
   </ion-item>
-  
+
   <ion-item *ngIf="!cart.length">
-      <h2 class="center">Cart is empty</h2>
-    </ion-item>
+    <h2 class="center">Cart is empty</h2>
+  </ion-item>
 
 </ion-content>
 
 <ion-footer>
-
-    <ion-card>
-        <ion-list *ngIf="cart.length">
-          <ion-item>
-            <h2>SUBTOTAL</h2>
-            <h2 item-right>${{getSubTotal()}}</h2>
-          </ion-item>
-          <ion-item>
-            <h2>TAXES</h2>
-            <h2 item-right>${{getTaxTotal()}}</h2>
-          </ion-item>
-          <ion-item>
-            <h2>Total Due</h2>
-            <h2 item-right>${{getGrandTotal()}}</h2>
-          </ion-item>
-        </ion-list>
-      </ion-card>
-  <button ion-button block color="primary" icon="cart" (click)="addMore($event, item)">
+  <ion-card>
+    <ion-list *ngIf="cart.length">
+      <ion-item>
+        <h2>SUBTOTAL</h2>
+        <h2 item-right>${{getSubTotal()}}</h2>
+      </ion-item>
+      <ion-item *ngIf="flagPay">
+        <h2>TAXES</h2>
+        <h2 item-right>${{getTaxTotal()}}</h2>
+      </ion-item>
+      <ion-item *ngIf="flagPay">
+        <h2>Total Due</h2>
+        <h2 item-right>${{getGrandTotal()}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <button ion-button block color="primary" icon="add-circle" (click)="addMore($event, item)" *ngIf="flagCheckout">
     <ion-icon name="ios-add"></ion-icon>Add more items</button>
-  <button ion-button block color="dark" icon="cart" (click)="checkOut($event, item)">
+  <button ion-button block color="dark" icon="card" (click)="confirmPay($event, item)" *ngIf="flagPay">
     <ion-icon name="ios-cart"></ion-icon>
-    PAY</button>
-  <button ion-button block color="danger" icon="cart" (click)="deleteCart()">
+    Pay</button>
+  <button ion-button block color="dark" icon="checkmark-circle" (click)="checkOut($event, item)" *ngIf="flagCheckout">
+    <ion-icon name="ios-cart"></ion-icon>
+    Checkout</button>
+  <button ion-button block color="danger" icon="trash" (click)="deleteCart()" *ngIf="flagCheckout">
     <ion-icon name="ios-trash"></ion-icon>
     Delete Cart</button>
+  <button ion-button block color="danger" icon="close-circle" (click)="cancel()" *ngIf="flagPay">
+    <ion-icon name="ios-trash"></ion-icon>
+    Cancel</button>
   <ion-row>
     <ion-col no-padding>
       <button id="notification-button" no-margin ion-button full color="primary" (click)="navigate($event, 'menu')">

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-title text-center>
+      <p style="color: Black">Order Confirmation</p>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-item>
+          <h4>{{location.config.guestName}}</h4>
+          <h4>Pick Up Location</h4>
+          <ion-avatar item-left>
+            <img src="{{location.config.sImage1}}">
+          </ion-avatar>
+          <h2>{{location.name}}</h2>
+          <p>{{ location.address[0].address1}}</p>
+          <p>{{ location.address[0].city}},{{ location.address[0].state}} {{ location.address[0].zip}}</p>
+        </ion-item>
+      </ion-card>
+
+<div class='container content'>
+  <br>
+  <h3 style='color: white;'>Order complete!</h3>
+
+  <p>Congratuations! Your Yeyos Order # 16787 is placed and will be ready in few minutes. We sent you a confirmation email for your records. Thanks so much!</p>
+
+  <div v-if='orderDetails'>
+    <dl>
+      <dt>Order Number</dt>
+      <dd>{{ orderDetails.id }}</dd>
+      <dt>Order Created</dt>
+      <dt>Payment Amount</dt>
+      <dd>{{ orderDetails.amount}}</dd>
+      <dt>Pick-up Address</dt>
+      <dt>3606 SW Central Av, Bentonville, AR - 72712</dt>
+      <dt>Engraving Text</dt>
+      <dd>{{ orderDetails.description }}</dd>
+      <dt>Email</dt>
+      <dd>{{ orderDetails.receipt_email }}</dd>
+    </dl>
+  </div>
+</div>
+</ion-content>

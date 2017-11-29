@@ -1,16 +1,51 @@
 <ion-header>
-    <ion-navbar hideBackButton="true">
-        <ion-title text-center>
-            <p style="color: Black">Checkout</p>
-          </ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-title text-center>
+      <p style="color: Black">Add Payment</p>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
-    <ion-item>
-        <ion-label stacked>Thank you!</ion-label>
-        <ion-label stacked>Your Order Number is # 160</ion-label>
-    </ion-item> 
-    <button ion-button block color="dark" icon="cart" (click)="placeNeworder($event)">Place New Order</button> 
-
+  <div class="card-container"></div>
+  <form card container=".card-container" card-width="250"  
+  [messages]="{validDate: 'valid\ndate', monthYear: 'mm/yyyy'}"  
+  [placeholders]="{number: '•••• •••• •••• ••••', name: 'Full Name', expiry: '••/••', cvc: '•••'}" 
+  formatting="false" 
+  debug="false">
+  <fieldset class="slds-form-element">
+        <div class="slds-form-element__group">
+          <div class="slds-form-element__row">
+            <div class="slds-form-element">
+              <input type="text" name="number" placeholder="Card number" class="slds-input" card-number/>
+            </div>
+          </div>
+          <div class="slds-form-element__row">
+            <div class=" slds-size_1-of-2">
+              <div class="slds-form-element">
+                <input type="text" name="first-name" placeholder="First name" class="slds-input" card-name/>
+              </div>
+            </div>
+            <div class=" slds-size_1-of-2">
+              <div class="slds-form-element">
+                <input type="text" name="last-name" placeholder="Last name" class="slds-input" card-name/>
+              </div>
+            </div>
+          </div>
+          <div class="slds-form-element__row">
+            <div class=" slds-size_1-of-2">
+              <div class="slds-form-element">
+                <input type="text" name="expiry" placeholder="MM/YY" class="slds-input" card-expiry/>
+              </div>
+            </div>
+            <div class=" slds-size_1-of-2">
+              <div class="slds-form-element">
+                <input type="text" name="cvc" placeholder="CVC" class="slds-input" card-cvc/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+  </form>
+  <button ion-button block color="dark" icon="cart" (click)="placeNeworder($event)">Done</button>
 </ion-content>
