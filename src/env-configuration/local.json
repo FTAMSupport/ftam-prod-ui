@@ -1,0 +1,6 @@
+{
+  "env": "local",
+  "apiUrl": "http://localhost:3001",
+  "baseUrl": "/",
+  "enableDebug": true
+}

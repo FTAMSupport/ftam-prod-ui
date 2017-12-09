@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { GlobalVarApi } from '../services/global-vars-api.service';
 import { Observable } from 'rxjs/Observable';
+import {EnvConfigurationProvider} from "gl-ionic2-env-configuration";
+import {ITestAppEnvConfiguration} from "../env-configuration/ITestAppEnvConfiguration";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -9,10 +11,13 @@ import 'rxjs/add/operator/catch';
 export class CartApi {
   public cart = [];
   private errorMessage: any = '';
+  private config: ITestAppEnvConfiguration;
   constructor(
     private http: Http,
-    private globalvarApi: GlobalVarApi
+    private globalvarApi: GlobalVarApi,
+    private envConfiguration: EnvConfigurationProvider<ITestAppEnvConfiguration>
   ) {
+    this.config = envConfiguration.getConfig();
     // Get cartItem details from global-var
     this.cart = this.globalvarApi.getCartItems();
   }
@@ -22,7 +27,8 @@ export class CartApi {
   }
 
   getCart() {
-    const url = 'http://grabbyrg.azurewebsites.net//api/menu/getByRestaurantId/' + 1;
+    const url = this.config.apiUrl + "/api/menu/getByRestaurantId/" + 1;
+   // const url = 'http://grabbyrg.azurewebsites.net/api/menu/getByRestaurantId/' + 1;
    // const url = 'http://localhost:3001/api/menu/getByRestaurantId/' + 1;
     return new Promise(resolve => {
       //this.http.get('assets/menu.json')
@@ -39,6 +45,7 @@ export class CartApi {
   }
 
   emptyCart() {
+    console.log(this.config);
     for (var i = 0; i < this.cart.length; i++) {
       this.cart.splice(i, 1);
       i--;
@@ -46,6 +53,7 @@ export class CartApi {
   }
 
   removeItemById(id) {
+    console.log(this.config);
     for (var i = 0; i < this.cart.length; i++) {
       if (this.cart[i].id == id) {
         this.cart.splice(i, 1);
@@ -127,8 +135,9 @@ export class CartApi {
         }
       );
     }
+    const url = this.config.apiUrl + "/api/tax/lookup";
     // const url = 'http://localhost:3001/api/tax/lookup';
-    const url = 'http://grabbyrg.azurewebsites.net/api/tax/lookup';
+    // const url = 'http://grabbyrg.azurewebsites.net/api/tax/lookup';
     var body = data;
     return new Promise(resolve => {
       this.http.post(url, body)
@@ -151,8 +160,9 @@ export class CartApi {
   }
 
   createOrder(orderInfo, paymentInfo) {
+    const url = this.config.apiUrl + "/api/order";
    // const url = 'http://localhost:3001/api/order';
-   const url = 'http://grabbyrg.azurewebsites.net/api/order';
+  // const url = 'http://grabbyrg.azurewebsites.net/api/order';
     var body = {
       "id": 9997,
       "entity_id": 1,
@@ -335,7 +345,7 @@ export class CartApi {
 
   // get IP addres
   getIPAdress() {
-    return this.http.get('http://ipv4.myexternalip.com/json')
+    return this.http.get('https://ipv4.myexternalip.com/json')
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -505,7 +515,7 @@ export class CartApi {
     };
 
     // populate customerIP address
-    const url = 'http://ipv4.myexternalip.com/json';
+    const url = 'https://ipv4.myexternalip.com/json';
     return new Promise(resolve => {
       this.http.get(url)
         .subscribe(res => {
@@ -521,7 +531,9 @@ export class CartApi {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     // headers.append('Authorization', token );
-    return this.http.post('http://localhost:3001/api/order', body, { headers: headers })
+   const url = this.config.apiUrl + "/api/order";
+   // return this.http.post('http://localhost:3001/api/order', body, { headers: headers })
+   return this.http.post(url, body, { headers: headers })
       .map(this.extractData)
       .catch(this.handleError);
   }

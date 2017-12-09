@@ -110,6 +110,17 @@ export class ExmComponentPage implements OnDestroy {
   }
   private onSuccess = (opaqueData: OpaqueData) => {
     console.log("Success" + JSON.stringify(OpaqueData));
+    let alert = this.alertCtrl.create({
+      title: 'Success',
+      subTitle: 'Payment posted successfully',
+    });
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        this.navCtrl.push(CartPage, {"payment" : "OK"});
+      }
+    });
+    alert.present();
     //post opaqueData
     //"dataDescriptor":"COMMON.ACCEPT.INAPP.PAYMENT",
     //"dataValue":"9487801666614876704604"

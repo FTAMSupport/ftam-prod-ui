@@ -7,6 +7,8 @@ import {AngularAnetModule} from "../angular-anet/angular-anet.module";
 
 // Http import
 import { HttpModule } from '@angular/http';
+// Import ENV module
+import { GLIonic2EnvConfigurationModule } from 'gl-ionic2-env-configuration';
 
 // Page imports
 import { CartPage } from '../pages/cart/cart';
@@ -44,6 +46,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HttpModule,
     CardModule,
     IonicModule.forRoot(MyApp),
+    GLIonic2EnvConfigurationModule,
     AngularAnetModule
   ],
   bootstrap: [IonicApp],

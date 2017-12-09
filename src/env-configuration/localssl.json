@@ -1,0 +1,6 @@
+{
+  "env": "localssl",
+  "apiUrl": "https://localhost:3002",
+  "baseUrl": "/",
+  "enableDebug": true
+}
