@@ -12,8 +12,8 @@ export class LocationApi {
   getLocation(){
     this.globalvarApi.reset();
     return new Promise(resolve => {
-      //this.http.get('assets/restaurant.json')
-      this.http.get('http://grabbyapi.azurewebsites.net/api/restaurant/getAllRestaurants')
+     // this.http.get('http://localhost:3001/api/restaurant/getAllRestaurants')
+      this.http.get('http://grabbyrg.azurewebsites.net/api/restaurant/getAllRestaurants')
         .subscribe(
           res => resolve(res.json()));
     });

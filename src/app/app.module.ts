@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { CardModule } from 'ngx-card/ngx-card';
+import {AngularAnetModule} from "../angular-anet/angular-anet.module";
 
 // Http import
 import { HttpModule } from '@angular/http';
@@ -14,6 +15,7 @@ import { LocationPage } from '../pages/location/location';
 import { IngredientsPage } from '../pages/ingredients/ingredients';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { ConfirmationPage } from '../pages/confirmation/confirmation';
+import { ExmComponentPage } from '../example/exm.component';
 
 // Service imports
 import { ItemApi } from '../services/item-api.service';
@@ -34,13 +36,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     IngredientsPage,
     CartPage,
     CheckoutPage, 
-    ConfirmationPage
+    ConfirmationPage,
+    ExmComponentPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     CardModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularAnetModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +54,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LocationPage,
     IngredientsPage,
     CheckoutPage,
-    ConfirmationPage
+    ConfirmationPage,
+    ExmComponentPage
   ],
   providers: [
     StatusBar,

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { CardModule } from 'ngx-card/ngx-card';
@@ -16,28 +16,15 @@ import { templateJitUrl } from '@angular/compiler';
 // The Http provider is included to make the API call to the service.
 @Component({
   selector: 'page-checkout',
-  templateUrl: 'checkout.html',
+  template: `
+  <form id="send_hptoken" action="https://test.authorize.net/payment/payment" method="post" target="load_payment" >
+	<input type="hidden" name="token" value="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.4yLWw73E" />
+</form>
+  `,
   providers: [Http, CardModule]
 })
 
 export class CheckoutPage {
-
-  ngAfterViewInit(){
-console.log("ngAfterViewInit");
-    }
-     
-    parseQueryString(str) {
-    var vars = [];
-    var arr = str.split('&');
-    var pair;
-    for (var i = 0; i < arr.length; i++) {
-    pair = arr[i].split('=');
-    //vars[pair[0]] = unescape(pair[1]);
-    vars[pair[0]] = pair[1];
-    }
-    return vars;
-    }
-
   // The items array to populate with data is created
   item: any;
   cardinfo: any;

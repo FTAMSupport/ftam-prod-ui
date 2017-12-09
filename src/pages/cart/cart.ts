@@ -8,6 +8,7 @@ import { LocationPage } from "../location/location";
 import { MenuPage } from '../menu/menu';
 import { CheckoutPage } from '../checkout/checkout';
 import { ConfirmationPage } from '../confirmation/confirmation';
+import { ExmComponentPage } from '../../example/exm.component';
 
 // Service import for items
 import { ItemApi, CartApi, GlobalVarApi } from '../../services/service';
@@ -30,6 +31,8 @@ export class CartPage {
   cartHeader: string = 'Confirm Order';
   flagPay: boolean = true;
   flagCheckout: boolean = false;
+  private errorMessage: any = '';
+  private phoneNo: string = "";
 
   constructor(
     public navCtrl: NavController,
@@ -54,6 +57,10 @@ export class CartPage {
       this.flagPay = false;
       this.flagCheckout = true;
       console.log(this.item);
+    }
+    if (this.navParams.data["payment"] === "cancel"){
+      this.flagPay = false;
+      this.flagCheckout = true;
     }
     // Set cartItem details in global-var
     this.globalvarApi.setCartItems(this.cart);
@@ -178,31 +185,102 @@ export class CartPage {
 
   checkOut2(item) {
     console.log("Add More Items tapped");
-    this.navCtrl.push(CheckoutPage, item);
+   // this.navCtrl.push(CheckoutPage, item); 
+    this.navCtrl.push(ExmComponentPage, item);
   }
 
   // Present this pop-up only when applicable
   checkOut($event, item) {
-    let alert = this.alertCtrl.create();
-    alert.setTitle('Please provide your Contact Number');
-    alert.addInput({
-      name: 'phone',
-      placeholder: 'your mobile number'
-    });
-    alert.addButton('Cancel');
-    alert.addButton({
-      text: 'Ok',
-      handler: data => {
-        console.log(data.phone);
-        this.checkOut2(item);
-      }
-    });
-    alert.present();
+    this.phoneNo = this.globalvarApi.getPhoneNo();
+    if (!this.phoneNo) {
+      let alert = this.alertCtrl.create();
+      alert.setTitle('Please provide your Contact Number');
+      alert.addInput({
+        name: 'phone',
+       // placeholder: 'Enter 10 digit mobile number',
+        value: "1234567898"
+      });
+      alert.addButton('Cancel');
+      alert.addButton({
+        text: 'Ok',
+        handler: data => {
+          if (data.phone) {
+            var phonenum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            if (data.phone.match(phonenum)) {
+              console.log(data.phone);
+              this.globalvarApi.setPhoneNo(data.phone);
+              this.checkOut2(item);
+            }
+            else {
+              this.checkOut($event, item);
+            }
+          } else {
+            this.checkOut($event, item);
+          }
+        }
+      });
+      alert.present();
+    }
+    else{
+      this.checkOut2(item);
+    }
   }
 
   confirmPay($event, item) {
     console.log("Confirm Pay tapped");
-    this.navCtrl.push(ConfirmationPage);
+    //1. Order details - //populate with known details
+    var order = {};
+    order["entityId"] = this.globalvarApi.location.entityId;
+    order["restaurantId"] = this.globalvarApi.location.restaurantId;
+    order["customer_id"] = 0; //guest 
+    order["customer_user_agent"] = "None";
+    order["customer_note"] = "None";
+
+    //2. Payment details - //populate with known details
+    var order = {};
+    order["entityId"] = this.globalvarApi.location.entityId;
+    order["restaurantId"] = this.globalvarApi.location.restaurantId;
+    order["customer_id"] = 0; //guest 
+    order["customer_phone_no"] = this.globalvarApi.getPhoneNo();
+    order["customer_user_agent"] = "None";
+    order["customer_note"] = "None";
+    //loader logic
+    let loader = this.loadingController.create({
+      content: "Processing your payment and placing order..."
+    });
+    loader.present();
+
+    //Populate POST body with orderinfo and paymentinfo
+    this.cartApi.populateOrderdata({}, {}).then(data => {
+      var body = data;
+      //Call POST create order
+      this.cartApi.postOrder(body)
+        .subscribe(
+        data => {
+          loader.dismiss();
+          console.log(data);
+          this.navCtrl.push(ConfirmationPage);
+        },
+        error => {
+          this.errorMessage = <any>error;
+          loader.dismiss();
+          console.log(this.errorMessage);
+          this.navCtrl.push(ConfirmationPage);
+        })
+    });
+
+
+    /*     console.log("Confirm Pay tapped");
+        //Pay and create Order
+        let loader = this.loadingController.create({
+          content: "Processing your payment and placing order..."
+        });
+        loader.present();
+        this.cartApi.createOrder({}, {}).then(data => {
+          loader.dismiss();
+          // this.menu = this.menu.filter(item => item.category == this.passedCategory);
+          console.log(data);
+        }); */
   }
 
   navigate($event, name) {

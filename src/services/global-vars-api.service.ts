@@ -4,10 +4,13 @@ import { Http } from '@angular/http';
 @Injectable()
 export class GlobalVarApi {
   public location: any;
+  public phoneNo: any;
+  public paymentInfo: any;
   public cartItems: any;
   constructor() {
     this.location = "";
     this.cartItems = [];
+    this.paymentInfo = {};
   }
 
   //-- chosen location & restaurant info
@@ -29,6 +32,21 @@ export class GlobalVarApi {
     return this.cartItems.length;
   }
 
+  //-- phone number
+  setPhoneNo(value) {
+    this.phoneNo = value;
+  }
+  getPhoneNo() {
+    return this.phoneNo;
+  }
+  
+//-- payment details
+setPaymentInfo(value) {
+  this.paymentInfo = value;
+}
+getPaymentInfo() {
+  return this.paymentInfo;
+}
   //-- reset
   reset(){
      this.location = [];

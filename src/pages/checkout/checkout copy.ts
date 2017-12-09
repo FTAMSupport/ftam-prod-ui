@@ -1,8 +1,7 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { CardModule } from 'ngx-card/ngx-card';
-//import './AcceptUI.js';
 
 // Import pages to allow links to the page
 import { MenuPage } from '../menu/menu';
@@ -21,23 +20,6 @@ import { templateJitUrl } from '@angular/compiler';
 })
 
 export class CheckoutPage {
-
-  ngAfterViewInit(){
-console.log("ngAfterViewInit");
-    }
-     
-    parseQueryString(str) {
-    var vars = [];
-    var arr = str.split('&');
-    var pair;
-    for (var i = 0; i < arr.length; i++) {
-    pair = arr[i].split('=');
-    //vars[pair[0]] = unescape(pair[1]);
-    vars[pair[0]] = pair[1];
-    }
-    return vars;
-    }
-
   // The items array to populate with data is created
   item: any;
   cardinfo: any;
@@ -79,35 +61,6 @@ console.log("ngAfterViewInit");
     }
     console.log(this.item);
   }
-  paymentFormUpdate(opaqueData) {
-    console.log("clicked payment form update");
-   // document.getElementById("dataDescriptor").value = opaqueData.dataDescriptor;
-   // document.getElementById("dataValue").value = opaqueData.dataValue;
-
-    // If using your own form to collect the sensitive data from the customer,
-    // blank out the fields before submitting them to your server.
-    // document.getElementById("cardNumber").value = "";
-    // document.getElementById("expMonth").value = "";
-    // document.getElementById("expYear").value = "";
-    // document.getElementById("cardCode").value = "";
-
-    //document.getElementById("paymentForm").submit();
-}
-
-  responseHandler(response) {
-    if (response.messages.resultCode === "Error") {
-        var i = 0;
-        while (i < response.messages.message.length) {
-            console.log(
-                response.messages.message[i].code + ": " +
-                response.messages.message[i].text
-            );
-            i = i + 1;
-        }
-    } else {
-        this.paymentFormUpdate(response.opaqueData);
-    }
-}
 
   placeNeworder($event) {
     this.paymentInfo = this.globalApi.getPaymentInfo();
