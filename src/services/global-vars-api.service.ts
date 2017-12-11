@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class GlobalVarApi {
   getCartItems() {
     return this.cartItems;
   }
-  getCount(){
+  getCount() {
     return this.cartItems.length;
   }
 
@@ -39,18 +39,18 @@ export class GlobalVarApi {
   getPhoneNo() {
     return this.phoneNo;
   }
-  
-//-- payment details
-setPaymentInfo(value) {
-  this.paymentInfo = value;
-}
-getPaymentInfo() {
-  return this.paymentInfo;
-}
+
+  //-- payment details
+  setPaymentInfo(value) {
+    this.paymentInfo = value;
+  }
+  getPaymentInfo() {
+    return this.paymentInfo;
+  }
   //-- reset
-  reset(){
-     this.location = [];
-     this.cartItems = [];
+  reset() {
+   // this.location = [];
+    this.cartItems = [];
   }
 
 }

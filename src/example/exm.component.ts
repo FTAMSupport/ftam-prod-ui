@@ -64,12 +64,15 @@ export class ExmComponentPage implements OnDestroy {
     console.log(this.item);
 
     this.item = this.navParams.data;
-    this.authNetResponses = authNetService
+/*     this.authNetResponses = authNetService
       .anetResponses
-      .subscribe(this.onSuccess, this.onError);
+      .subscribe(this.onSuccess, this.onError); */
   }
 
   private sendPaymentDataToAnet(form) {
+    this.authNetResponses = this.authNetService
+    .anetResponses
+    .subscribe(this.onSuccess, this.onError);
     this.merchantAuth = new MerchantAuthentication();
     this.merchantAuth.clientKey = "5MpJ8um8d4QErWbHXfxynsf8K3Bb7uQd6m42JhMwr5y2HraSWcdLpUbGjuqZD627";
     this.merchantAuth.apiLogin = "4yLWw73E";
@@ -85,16 +88,18 @@ export class ExmComponentPage implements OnDestroy {
   }
 
   private onError = (errMesg: Message) => {
-    console.log("Error: " + JSON.stringify(errMesg));
     let alert = this.alertCtrl.create({
       title: 'Incorrect info',
-      subTitle: 'Please validate details',
+      subTitle: JSON.stringify(errMesg.text),
     });
     alert.addButton({
       text: 'Ok',
+      role: 'cancel',
       handler: data => {
         console.log("card info - Ok");
-        this.navCtrl.push(ExmComponentPage);
+       // this.authNetResponses.unsubscribe();
+       // this.navCtrl.push(ExmComponentPage);
+       // alert.dismiss();
         //this.checkOut($event, item);
       }
     });
@@ -109,22 +114,19 @@ export class ExmComponentPage implements OnDestroy {
     alert.present();
   }
   private onSuccess = (opaqueData: OpaqueData) => {
-    console.log("Success" + JSON.stringify(OpaqueData));
-    let alert = this.alertCtrl.create({
-      title: 'Success',
-      subTitle: 'Payment posted successfully',
-    });
-    alert.addButton({
-      text: 'Ok',
-      handler: data => {
-        this.navCtrl.push(CartPage, {"payment" : "OK"});
-      }
-    });
-    alert.present();
-    //post opaqueData
-    //"dataDescriptor":"COMMON.ACCEPT.INAPP.PAYMENT",
-    //"dataValue":"9487801666614876704604"
-  }
+    //capture opaqueData
+    this.paymentInfo = this.globalApi.getPaymentInfo();
+    this.paymentInfo["number"] = this.paymentNumber;
+    this.paymentInfo["name1"] = this.paymentName1;
+    this.paymentInfo["name2"] = this.paymentName2;
+    this.paymentInfo["expiry"] = this.paymentExpiry;
+    this.paymentInfo["cvc"] = this.paymentCVC;
+    this.paymentInfo["dataDescriptor"] = opaqueData["dataDescriptor"];
+    this.paymentInfo["dataValue"] = opaqueData["dataValue"];
+    this.globalApi.setPaymentInfo(this.paymentInfo);
+    this.paymentInfo = this.globalApi.getPaymentInfo();
+    this.navCtrl.push(CartPage, {"payment" : "OK"});
+    }
 
   ngOnDestroy() {
     this.authNetResponses.unsubscribe();

@@ -9,9 +9,11 @@ export class MenuApi {
   constructor(private http: Http, private envConfiguration: EnvConfigurationProvider<ITestAppEnvConfiguration>) {
     this.config = envConfiguration.getConfig();
   }
-  getMenu(restaurantID) {
-    console.log(restaurantID);
-    const url = this.config.apiUrl + "/api/menu/getByRestaurantId/" + restaurantID;
+  getMenu(entityID, restaurantID) {
+    console.log("EntityID: " + entityID);
+    console.log("RestaurantID" + restaurantID);
+    const url = this.config.apiUrl + "/api/menu/getByEntityIdAndRestaurantId/" + entityID + "/" + restaurantID;
+    //const url = this.config.apiUrl + "/api/menu/getByRestaurantId/" + restaurantID;
     //const url = 'http://localhost:3001/api/menu/getByRestaurantId/' + restaurantID;
     // const url = 'http://grabbyrg.azurewebsites.net/api/menu/getByRestaurantId/' + restaurantID;
     return new Promise(resolve => {

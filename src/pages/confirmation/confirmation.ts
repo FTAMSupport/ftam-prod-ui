@@ -13,7 +13,7 @@ import { ItemApi, CartApi, GlobalVarApi } from '../../services/service';
 // The component imports the specific parts from the html and scss file.
 // The Http provider is included to make the API call to the service.
 @Component({
-  selector: 'page-checkout',
+  selector: 'page-confirmation',
   templateUrl: 'confirmation.html',
   providers: [Http, CardModule]
 })
@@ -44,16 +44,20 @@ export class ConfirmationPage {
 
     // Get location details from global-var
     this.location = this.globalvarApi.getLocation();
-    this.item = this.navParams.data;
-    console.log(this.item);
-  }
+  
+      this.item = this.navParams.data;
+      console.log(this.item);
+      if (this.item["order"] !== undefined) {
+        this.orderDetails.id = this.item.order.order_number;
+      } else
+      {
+        this.orderDetails.id = "Error in processing order: " + JSON.stringify(this.item);
+      }
+    }
 
-  placeNeworder($event) {
+  placeNeworder() {
     console.log("Place New Order tapped");
     //this.navCtrl.push(MenuPage);
-    this.navCtrl.push(CartPage);
-  }
-  pay() {
-    console.log("clicked pay");
+    this.navCtrl.push(MenuPage, {resetFlag: true});
   }
 }

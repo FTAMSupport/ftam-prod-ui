@@ -24,6 +24,7 @@ export class MenuPage {
   // The items array to populate with data is created
   trigger: any;
   location: any;
+  mode: any;
   menu: any;
   passedCategory: any;
   cartCount: any;
@@ -37,6 +38,11 @@ export class MenuPage {
     private globalvarApi: GlobalVarApi,
     public loadingController: LoadingController
   ) {
+    this.mode = this.navParams.data;
+    if (this.mode && this.mode.resetFlag === true){
+      this.globalvarApi.reset();
+      this.cartCount = 0;
+    }
     // Get location info from global-var
     this.location = this.globalvarApi.getLocation();
     // Cart Count
@@ -61,8 +67,9 @@ export class MenuPage {
 
     // Get the JSON data from our locationApi
     let restaurantID = this.location.restaurantId;
+    let entityID = this.location.entityId;
     console.log(restaurantID);
-    this.menuApi.getMenu(restaurantID).then(data => {
+    this.menuApi.getMenu(entityID, restaurantID).then(data => {
       loader.dismiss();
       this.menu = data[0].category;
       // this.menu = this.menu.filter(item => item.category == this.passedCategory);

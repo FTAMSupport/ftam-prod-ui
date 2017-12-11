@@ -31,6 +31,7 @@ export class CartPage {
   cartHeader: string = 'Confirm Order';
   flagPay: boolean = true;
   flagCheckout: boolean = false;
+  flagModifyOrder: boolean = true;
   private errorMessage: any = '';
   private phoneNo: string = "";
 
@@ -61,6 +62,12 @@ export class CartPage {
     if (this.navParams.data["payment"] === "cancel"){
       this.flagPay = false;
       this.flagCheckout = true;
+    }
+    if (this.navParams.data["payment"] === "OK"){
+      console.log(this.globalvarApi.getPaymentInfo());
+      this.flagPay = true;
+      this.flagCheckout = false;
+      this.flagModifyOrder = true;
     }
     // Set cartItem details in global-var
     this.globalvarApi.setCartItems(this.cart);
@@ -252,6 +259,7 @@ export class CartPage {
 
     //Populate POST body with orderinfo and paymentinfo
     this.cartApi.populateOrderdata({}, {}).then(data => {
+      console.log("post create order start");
       var body = data;
       //Call POST create order
       this.cartApi.postOrder(body)
@@ -259,13 +267,13 @@ export class CartPage {
         data => {
           loader.dismiss();
           console.log(data);
-          this.navCtrl.push(ConfirmationPage);
+          this.navCtrl.push(ConfirmationPage, data);
         },
         error => {
           this.errorMessage = <any>error;
           loader.dismiss();
           console.log(this.errorMessage);
-          this.navCtrl.push(ConfirmationPage);
+          this.navCtrl.push(ConfirmationPage, error);
         })
     });
 
