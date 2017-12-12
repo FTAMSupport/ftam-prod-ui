@@ -3,71 +3,45 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { Http } from '@angular/http';
 import { Content } from "ionic-angular";
 
-// Import pages to allow links to the page
 import { SingleItem } from '../../pages/single-item/single-item';
 import { CartPage } from '../../pages/cart/cart';
 import { MenuPage } from '../menu/menu';
 
-// Service import for items
 import { ItemApi, CartApi, GlobalVarApi } from '../../services/service';
 
-// The component imports the specific parts from the html and scss file.
-// The Http provider is included to make the API call to the service.
+
 @Component({
   selector: 'page-ingredients',
   templateUrl: 'ingredients.html',
-  providers: [Http],
-  styles: [`
-  .scroll-content {
-    display: flex;
-    flex-direction: column;
-  }
-  .scroll-content ion-list {
-    margin-top: auto;
-    margin-bottom: 0;
-  }
-`]
+  providers: [Http]
 })
 
 export class IngredientsPage {
-  // The items array to populate with data is created
   public item: any;
   public location: any;
+  public cartCount: any;
   public passedCategory: any;
   public toggleShowHide = true;
   public qty: number = 1;
   public notes: string;
-  cartCount: any;
   
   @ViewChild(Content) content: Content;
   constructor(
     public navCtrl: NavController,
     private alertCtrl: AlertController,
     private navParams: NavParams,
+    public loadingController: LoadingController,
     private itemApi: ItemApi,
     private cartApi: CartApi,
-    private globalvarApi: GlobalVarApi,
-    public loadingController: LoadingController
+    private globalvarApi: GlobalVarApi
   ) {
-    // Get location details from global-var
     this.location = this.globalvarApi.getLocation();
-    this.item = this.navParams.data;
-    if (this.item.stepSelected != undefined) {
-      this.item.name = this.item.name + " " + this.item.stepSelected;
-    }
-    if (this.item.extraPrice != undefined) {
-      //this.item.price = parseInt(this.item.itemPrice, 100) + parseInt(this.item.extraPrice, 100);
-      this.item.price = this.item.itemPrice + parseInt(this.item.extraPrice);
-      
-    }
-    else{
-      this.item.price = this.item.itemPrice;
-    }
-    console.log(this.item);
-    // Cart Count
     this.cartCount = this.globalvarApi.getCount();
+    this.item = this.navParams.data;
+    this.item.name = this.item.stepSelected != undefined ? (this.item.itemName + " ( " + this.item.stepSelected + " )") : this.item.itemName;
+    this.item.price = this.item.extraPrice != undefined ? (this.item.itemPrice + parseFloat(this.item.extraPrice)) : this.item.itemPrice;
   }
-  //Scroll
+
   callScroll() {
     // use the content's dimension to obtain the current height of the scroll
     let dimension = this.content.getContentDimensions();
@@ -75,11 +49,9 @@ export class IngredientsPage {
     this.content.scrollTo(0, dimension.scrollHeight);
   }
 
-  // This function is an event to listen to clicks on elements.
   modifyItem($event, item) {
     this.toggleShowHide = !this.toggleShowHide;
     this.callScroll();
-    // console.log("modify pressed");
   }
 
   selectIng(e, ing) {
@@ -87,14 +59,10 @@ export class IngredientsPage {
     if (ing.ingredientAdditionalPrice != undefined) {
       switch (e.checked) {
         case true:
-         // this.item.itemPrice = parseInt(this.item.itemPrice, 100) + parseInt(ing.ingredientAdditionalPrice, 100);
-         this.item.itemPrice = this.item.itemPrice + ing.ingredientAdditionalPrice;
-         console.log(this.item.itemPrice);
+         this.item.price = this.item.price + ing.ingredientAdditionalPrice;
           break;
         case false:
-          //this.item.itemPrice = parseInt(this.item.itemPrice, 100) - parseInt(ing.ingredientAdditionalPrice, 100);
-          this.item.itemPrice = this.item.itemPrice - ing.ingredientAdditionalPrice;
-          console.log(this.item.itemPrice);
+          this.item.price = this.item.price - ing.ingredientAdditionalPrice;
           break;
         default:
           console.log("default");
@@ -114,9 +82,7 @@ export class IngredientsPage {
   }
 
   increment(value) {
-    //if (value < parseInt(this.location.config.maxOrders, 10)) {
       if (value < this.location.config.maxOrders) {
-      //this.qty = parseInt(value, 10) + 1;
       this.qty = value + 1;
     } else {
       let alert = this.alertCtrl.create({
@@ -130,7 +96,6 @@ export class IngredientsPage {
 
   decrement(value) {
     if (value > 0) {
-     // this.qty = parseInt(value, 10) - 1;
      this.qty = value - 1;
     } else {
       let alert = this.alertCtrl.create({

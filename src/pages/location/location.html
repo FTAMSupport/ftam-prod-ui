@@ -1,38 +1,25 @@
 <ion-header>
   <ion-navbar class="toolbar-background-md" hideBackButton="true">
     <ion-title text-center>
-      <p style="color: white">Pick a Location</p>
+      <p style="color: white">{{ 'LOCATION_PAGE_TITLE' | translate }}</p>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <!-- Toolbar to wrap search bar
-<ion-toolbar>
--->
-  <!-- Searchbar Code -->
-  <ion-searchbar
-    placeholder="Search"
-    (ionInput)="getLocation($event)">
+  <ion-searchbar placeholder="Search" (ionInput)="getLocation($event)">
   </ion-searchbar>
-  <!-- End of Searchbar Code -->
-  <!--
-  </ion-toolbar>
- End of Toolbar Code -->
 
-  <!-- List Code -->
   <ion-list>
     <ul *ngIf="locations">
-    <ion-item *ngFor="let location of locations" (click)="locationTapped(location)">
-      <ion-avatar item-left>
-        <img src="{{location.config.sImage1}}">
-      </ion-avatar>
-      <h2>{{location.name}}</h2>
-      <p>{{ location.address[0].address1}}</p>
-      <p>{{ location.address[0].city}},{{ location.address[0].state}} {{ location.address[0].zip}}</p>
-
-    </ion-item>
-      </ul>
+      <ion-item *ngFor="let location of locations" (click)="locationTapped(location)">
+        <ion-avatar item-left>
+          <img src="{{location.config.sImage1}}">
+        </ion-avatar>
+        <h2>{{location.name}}</h2>
+        <p>{{ location.address[0].address1}}</p>
+        <p>{{ location.address[0].city}},{{ location.address[0].state}} {{ location.address[0].zip}}</p>
+      </ion-item>
+    </ul>
   </ion-list>
-  <!-- End of List Code -->
 </ion-content>

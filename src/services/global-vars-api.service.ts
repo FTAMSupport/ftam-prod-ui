@@ -7,6 +7,9 @@ export class GlobalVarApi {
   public phoneNo: any;
   public paymentInfo: any;
   public cartItems: any;
+  public grandTotal: any;
+  public subTotal: any;
+  public taxTotal: any;
   constructor() {
     this.location = "";
     this.cartItems = [];

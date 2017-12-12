@@ -1,24 +1,22 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
       <ion-title text-center>
-          <p style="color: Black">Menu</p>
+          <p style="color: Black">{{ 'MENU_PAGE_TITLE' | translate }}</p>
         </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ion-icon name="pin">{{location.name}}</ion-icon>
-    <a (click)="changeLocation($event)">(Change Location)</a>
+    <a (click)="changeLocation($event)">{{ 'CHANGE_LOCATION_HYPER' | translate }}</a>
     <ion-item *ngFor="let cat of menu">
       <div class="category-description">{{ cat.categoryName }}</div>
       <ion-scroll scrollX="true" style="white-space: nowrap; height: 220px">
         <ion-row nowrap >
-          <!-- Beginning of the category card -->
           <div class="padding_helper col col-33" color="white" *ngFor="let k of cat.item">
               <img class="full-image" src="{{k.itemImage}}" (click)="presentPopup($event, k)">
               <div class="card-description">{{k.itemName}}</div>
          </div>
-          <!-- End of the category card -->
         </ion-row>
       </ion-scroll>
     </ion-item>

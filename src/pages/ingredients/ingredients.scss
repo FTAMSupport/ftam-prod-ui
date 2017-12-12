@@ -1,25 +1,30 @@
 page-ingredients {
-
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .scroll-content ion-list {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
   .full-image {
     position: relative;
-}
-
+  }
   .button-md-primary {
     color: #222;
     background-color: #fff;
   }
-  #notification-button {            
-    position: relative;
-    //width: 42px;
+  #notification-button {
+    position: relative; //width: 42px;
     //top:1px;
     //right: 1px;
     overflow: visible!important;
-}
-#notifications-badge {
+  }
+  #notifications-badge {
     background-color: rgb(255, 166, 0);
     position: absolute;
     top: -3px;
     right: -3px;
     border-radius: 100%;
-}
+  }
 }

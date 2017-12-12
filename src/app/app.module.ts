@@ -1,13 +1,13 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpModule, Http } from '@angular/http';
 import { MyApp } from './app.component';
 import { CardModule } from 'ngx-card/ngx-card';
 import {AngularAnetModule} from "../angular-anet/angular-anet.module";
-
-// Http import
-import { HttpModule } from '@angular/http';
-// Import ENV module
+import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { GLIonic2EnvConfigurationModule } from 'gl-ionic2-env-configuration';
 
 // Page imports
@@ -30,6 +30,10 @@ import { GlobalVarApi } from '../services/global-vars-api.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [
     MyApp,
@@ -44,10 +48,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     CardModule,
     IonicModule.forRoot(MyApp),
     GLIonic2EnvConfigurationModule,
-    AngularAnetModule
+    AngularAnetModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: createTranslateLoader,
+          deps: [HttpClient]
+      }
+  }) 
   ],
   bootstrap: [IonicApp],
   entryComponents: [

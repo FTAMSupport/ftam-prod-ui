@@ -1,0 +1,14 @@
+{
+    "LOCATION_PAGE_TITLE": "Pick a Location - Spanish",
+    "MENU_PAGE_TITLE": "Menu -Spanish",
+    "INGREDIENTS_PAGE_TITLE": "Ingredients - Spanish",
+    "CART_PAGE_TITLE": "Cart - Spanish",
+    "CHECKOUT_PAGE_TITLE": "Checkout - Spanish",
+    "CONFIRMATION_PAGE_TITLE": "Confirm - Spanish",
+    "BUTTON": {
+        "OK" : "Checkout - Spanish",
+        "CANCEL" : "Cancel - Spanish",
+        "PAY": "Pay - Spanish",
+        "CONFIRM": "Confirm - Spanish"
+    }
+}

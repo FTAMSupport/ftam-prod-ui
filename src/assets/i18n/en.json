@@ -1,0 +1,50 @@
+{
+    "LOCATION_PAGE_TITLE": "Pick a Location",
+    "PICK_UP_LOCATION_LABEL": "Pick-up Location",
+    "MENU_PAGE_TITLE": "Menu",
+    "CHANGE_LOCATION_HYPER": "Change Location",
+    "INGREDIENTS_PAGE_TITLE": "Ingredients",
+    "CART_PAGE_TITLE1": "My Cart",
+    "CART_PAGE_TITLE2": "Confirm Order",
+    "CHECKOUT_PAGE_TITLE": "Checkout",
+    "CONFIRMATION_PAGE_TITLE": "Confirm",
+    "CALORIES_LABEL" : "Calories", 
+    "EXTRAS_LABEL" : "Extras",
+    "COMMENTS_LABEL" : "Comments",
+    "CART_IS_EMPTY" : "Cart is empty",
+    "ORDER_DETAILS_LABEL" : "Order Details",
+    "QTY_LABEL" : "QTY",
+    "AMOUNT_LABEL" : "Amount",
+    "SUBTOTAL_LABEL" : "Subtotal",
+    "TAXES_LABEL" : "Taxes",
+    "TOTAL_DUE_LABEL" : "Total Due",
+    "PRICE_LABEL": "Price",
+    "ALERT":{
+        "CART":{
+            "ALERT1" : "Confirm Delete Cart",
+            "ALERT2" : "Are you sure you want to empty the cart?",
+            "ALERT3": "Confirm Delete Item",
+            "ALERT4" : "Are you sure you want to remove item from cart?",
+            "ALERT5": "Error",
+            "ALERT6": "Alert",
+            "ALERT7" : "This is considered a bulk order! Please contact restaurant for better service.",
+            "ALERT8" : "Quantity is 1, you cant reduce it, if you want to remove, please press remove button.",
+            "ALERT9" : "Contact Info",
+            "ALERT10" : "Enter 10 digit mobile number"
+        }
+    },
+    "LOADER": {
+        "LOCATION" : "Fetching Location Info...",
+        "MENU" : "Fetching Menu Info...",
+        "PAYMENT": "Processing your payment and placing order..."
+    },
+    "BUTTON": {
+        "OK" : "Ok",
+        "CANCEL" : "Cancel",
+        "REMOVE" : "Remove",
+        "PAY": "Pay",
+        "CONFIRM": "Confirm",
+        "ADD_TO_CART": "Add To Cart",
+        "MODIFY": "Modify"
+    }
+}

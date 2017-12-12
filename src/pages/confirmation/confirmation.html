@@ -21,15 +21,58 @@
 
   <ion-card>
     <ion-item>
-        <h3>Thank you!</h3>
-        <h4 style="font-size: 16px;">Your Order is # {{ orderDetails.id }}</h4>
+      <h3>Thank you!</h3>
+      <h4 style="font-size: 26px;">Your Order is # {{ orderDetails.id }}</h4>
     </ion-item>
   </ion-card>
-
-  <ion-footer>
-      <button ion-button block color="dark" icon="checkmark-circle" (click)="placeNeworder()">
-        <ion-icon name="ios-cart"></ion-icon>
-        Place New Order</button>
-    </ion-footer>
-
+  <ion-item>
+    <div class="row header">
+      <thead>
+        <tr>
+          <th style="width:70%">{{ 'ORDER_DETAILS_LABEL' | translate }}</th>
+          <th style="width:5%"></th>
+          <th style="width:10%">{{ 'QTY_LABEL' | translate }}</th>
+          <th style="width:5%"></th>
+          <th style="width:10%">{{ 'AMOUNT_LABEL' | translate }}</th>
+          <th style="width:5%"></th>
+        </tr>
+      </thead>
+    </div>
+    <ion-list>
+      <ion-item *ngFor="let item of cart">
+        <td style="width:70%">
+          <h2 style="white-space: normal">{{item.name}}</h2>
+        </td>
+        <td style="width:10%">
+          <h4>{{item.qty}}</h4>
+        </td>
+        <td style="width:10%">
+          <h4> ${{item.price * item.qty}}</h4>
+          <h4> ${{item.tax}}</h4>
+        </td>
+      </ion-item>
+    </ion-list>
+  </ion-item>
 </ion-content>
+
+<ion-footer>
+  <ion-card>
+    <ion-list *ngIf="cart.length">
+      <ion-item>
+        <h2>{{ 'SUBTOTAL_LABEL' | translate }}</h2>
+        <h2 item-right>${{getSubTotal()}}</h2>
+      </ion-item>
+      <ion-item>
+        <h2>{{ 'TAXES_LABEL' | translate }}</h2>
+        <h2 item-right>${{getTaxTotal()}}</h2>
+      </ion-item>
+      <ion-item>
+        <h2>{{ 'TOTAL_DUE_LABEL' | translate }}</h2>
+        <h2 item-right>${{getGrandTotal()}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <button ion-button block color="dark" icon="checkmark-circle" (click)="placeNeworder()">
+    <ion-icon name="ios-cart"></ion-icon>
+    Place New Order</button>
+</ion-footer>

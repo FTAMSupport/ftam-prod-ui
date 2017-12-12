@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
     <ion-title text-center>
-      <p style="color: Black">{{cartHeader}}</p>
+      <p style="color: Black">{{ 'PICK_UP_LOCATION_LABEL' | translate }}</p>
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -23,11 +23,11 @@
     <div class="row header">
       <thead>
         <tr>
-          <th style="width:70%">Order Details</th>
+          <th style="width:70%">{{ 'ORDER_DETAILS_LABEL' | translate }}</th>
           <th style="width:5%"></th>
-          <th style="width:10%">QTY</th>
+          <th style="width:10%">{{ 'QTY_LABEL' | translate }}</th>
           <th style="width:5%"></th>
-          <th style="width:10%">Amount</th>
+          <th style="width:10%">{{ 'AMOUNT_LABEL' | translate }}</th>
           <th style="width:5%"></th>
         </tr>
       </thead>
@@ -36,7 +36,7 @@
     <ion-list>
       <ion-item *ngFor="let item of cart">
         <td style="width:70%">
-          <h2>{{item.itemName}}</h2>
+          <h2 style="white-space: normal">{{item.name}}</h2>
         </td>
         <td style="width:5%">
           <button clear item-right (click)="quantityPlus(item)"  *ngIf="flagCheckout">
@@ -52,7 +52,7 @@
           </button>
         </td>
         <td style="width:10%">
-          <h4> ${{item.itemPrice * item.qty}}</h4>
+          <h4> ${{item.price * item.qty}}</h4>
           <h4 *ngIf="flagPay"> ${{item.tax}}</h4>
         </td>
         <td style="width:5%">
@@ -65,7 +65,7 @@
   </ion-item>
 
   <ion-item *ngIf="!cart.length">
-    <h2 class="center">Cart is empty</h2>
+    <h2 class="center">{{ 'CART_IS_EMPTY' | translate }}</h2>
   </ion-item>
 
 </ion-content>
@@ -74,20 +74,20 @@
   <ion-card>
     <ion-list *ngIf="cart.length">
       <ion-item>
-        <h2>SUBTOTAL</h2>
+        <h2>{{ 'SUBTOTAL_LABEL' | translate }}</h2>
         <h2 item-right>${{getSubTotal()}}</h2>
       </ion-item>
       <ion-item *ngIf="flagPay">
-        <h2>TAXES</h2>
+        <h2>{{ 'TAXES_LABEL' | translate }}</h2>
         <h2 item-right>${{getTaxTotal()}}</h2>
       </ion-item>
       <ion-item *ngIf="flagPay">
-        <h2>Total Due</h2>
+        <h2>{{ 'TOTAL_DUE_LABEL' | translate }}</h2>
         <h2 item-right>${{getGrandTotal()}}</h2>
       </ion-item>
     </ion-list>
   </ion-card>
-  <button ion-button block color="primary" icon="add-circle" (click)="addMore($event, item)" *ngIf="flagCheckout">
+  <button ion-button block color="primary" icon="add-circle" (click)="navigate($event, 'menu')" *ngIf="flagCheckout">
     <ion-icon name="ios-add"></ion-icon>Add more items</button>
   <button ion-button block color="dark" icon="card" (click)="confirmPay($event, item)" *ngIf="flagPay">
     <ion-icon name="ios-cart"></ion-icon>

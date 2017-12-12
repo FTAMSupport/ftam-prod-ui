@@ -16,10 +16,10 @@ export class ItemApi {
   updateName(item){
         for(var i = 0; i < item.ingredients.length; i++){
           if (i === 0){
-            item.name = item.name + " with extra " + item.ingredients[i].name;
+            item.name = item.name + " with extra " + item.ingredients[i].ingredientName;
           }
           else{
-            item.name = item.name + ", " + item.ingredients[i].name;
+            item.name = item.name + ", " + item.ingredients[i].ingredientName;
           }
         } 
         return item;
