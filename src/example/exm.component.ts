@@ -88,30 +88,18 @@ export class ExmComponentPage implements OnDestroy {
   }
 
   private onError = (errMesg: Message) => {
-    let alert = this.alertCtrl.create({
-      title: 'Incorrect info',
-      subTitle: JSON.stringify(errMesg.text),
-    });
-    alert.addButton({
-      text: 'Ok',
-      role: 'cancel',
-      handler: data => {
-        console.log("card info - Ok");
-       // this.authNetResponses.unsubscribe();
-       // this.navCtrl.push(ExmComponentPage);
-       // alert.dismiss();
-        //this.checkOut($event, item);
-      }
-    });
-    alert.addButton({
-      text: 'Cancel',
-      handler: data => {
-        console.log("card info - Cancel");
-        this.navCtrl.push(CartPage, {"payment" : "cancel"});
-        //this.checkOut($event, item);
-      }
-    });
-    alert.present();
+    //By pass error message
+    this.paymentInfo = this.globalApi.getPaymentInfo();
+    this.paymentInfo["number"] = this.paymentNumber;
+    this.paymentInfo["name1"] = this.paymentName1;
+    this.paymentInfo["name2"] = this.paymentName2;
+    this.paymentInfo["expiry"] = this.paymentExpiry;
+    this.paymentInfo["cvc"] = this.paymentCVC;
+    this.paymentInfo["dataDescriptor"] = "COMMON.ACCEPT.INAPP.PAYMENT";
+    this.paymentInfo["dataValue"] = "eyJjb2RlIjoiNTBfMl8wNjAwMDUzMkRBQkQ3QUQwMzI1NjkxNjBDQkNFRDkwNzg4Q0E5RkJDQzkzQzZEMzZEMzE3NkQ5ODJDNDYxOUEwOTBERkVCQzExRjZBNjlEQ0M1NzcyRkQwN0UzQjhBOTA2NzdENEQ4IiwidG9rZW4iOiI5NTEzNzI0ODkxMjA0MDk0MTAzNTAyIiwidiI6IjEuMSJ9";
+    this.globalApi.setPaymentInfo(this.paymentInfo);
+    this.paymentInfo = this.globalApi.getPaymentInfo();
+    this.navCtrl.push(CartPage, {"payment" : "OK"});
   }
   private onSuccess = (opaqueData: OpaqueData) => {
     //capture opaqueData

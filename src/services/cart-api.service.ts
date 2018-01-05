@@ -80,7 +80,7 @@ export class CartApi {
     //return Math.round(amount * 100) / 100;
   }
 
-  taxLookUp(cartItems) {
+  taxLookUpNew(cartItems) {
     var data = {
       customerID: "CustomerG",
       deliveredBySeller: false,
@@ -120,6 +120,76 @@ export class CartApi {
               return obj.CartItemIndex === i;
             });
             cartItems[i]["tax"] = cartItem[0]["TaxAmount"];
+          }
+        },
+        error => (this.errorMessage = <any>error)
+        //  res => resolve(res.json())
+      );
+    });
+  }
+
+  taxLookUp(cartItems) {
+    var data = {
+      customerID: "CustomerG",
+      deliveredBySeller: false,
+      cartID: "00001",
+      destination: {
+        Address1: "SW A Street",
+        City: "Bentonville",
+        State: "AR",
+        Zip5: "72712",
+        Zip4: ""
+      },
+      origin: {
+        Address1: "SW A Street",
+        City: "Bentonville",
+        State: "AR",
+        Zip5: "72712",
+        Zip4: ""
+      },
+      cartItems: []
+    };
+
+    console.log(this.globalvarApi.location);
+
+    const taxDocument = {
+      type: 'SalesOrder',
+      companyCode: 'REBORNTECHNOLOGYLLC',
+      date: new Date(),
+      customerCode: 'CustomerG',
+      addresses: {
+        SingleLocation: {
+          line1: this.globalvarApi.location.address[0].address1,
+          city: this.globalvarApi.location.address[0].city,
+          region: this.globalvarApi.location.address[0].state,
+          country: "US",
+          postalCode: this.globalvarApi.location.address[0].zip
+        }
+      },
+      lines: []
+    }
+
+
+    for (var i = 0; i < cartItems.length; i++) {
+      taxDocument["lines"].push({
+        quantity: cartItems[i].qty,
+        amount: cartItems[i].price,
+        taxCode: "00000",
+        itemCode: cartItems[i].itemId,
+        number: i,
+        description: cartItems[i].name
+      });
+    }
+    const url = this.config.apiUrl + "/api/tax/lookup";
+    return new Promise(resolve => {
+      this.http.post(url, taxDocument).subscribe(
+        res => {
+          let taxes = JSON.parse(res["_body"]);
+          for (var i = 0; i < cartItems.length; i++) {
+            let cartItem = taxes["lines"].filter(function(obj) {
+              return parseInt(obj.lineNumber) === i;
+            });
+            cartItems[i]["tax"] = cartItem[0]["taxCalculated"];
           }
         },
         error => (this.errorMessage = <any>error)

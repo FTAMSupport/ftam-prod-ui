@@ -203,7 +203,7 @@ export class CartPage {
   }
 
   checkOut2(item) {
-    // this.navCtrl.push(CheckoutPage, item);
+   //  this.navCtrl.push(CheckoutPage, item);
     this.navCtrl.push(ExmComponentPage, item);
   }
 

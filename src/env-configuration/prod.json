@@ -1,6 +1,6 @@
 {
   "env": "prod",
-  "apiUrl": "http://grabbyrg.azurewebsites.net",
+  "apiUrl": "http://grabbyapi.azurewebsites.net",
   "baseUrl": "/",
   "enableDebug": false
 }

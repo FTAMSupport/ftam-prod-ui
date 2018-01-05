@@ -9,6 +9,7 @@ import {AngularAnetModule} from "../angular-anet/angular-anet.module";
 import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { GLIonic2EnvConfigurationModule } from 'gl-ionic2-env-configuration';
+import { CreditCardDirectivesModule } from 'angular-cc-library';
 
 // Page imports
 import { CartPage } from '../pages/cart/cart';
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     CardModule,
     IonicModule.forRoot(MyApp),
     GLIonic2EnvConfigurationModule,
+    CreditCardDirectivesModule,
     AngularAnetModule,
     TranslateModule.forRoot({
       loader: {
